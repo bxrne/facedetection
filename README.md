@@ -9,7 +9,7 @@ Using OpenCV and a Haar Cascade Classifier, it is able to detect faces in a vide
 It will save the frame with the most faces in it to a file.
 
 ## Video
-The video used in the demo is from Pexels, link to file: [https://www.pexels.com/video/video-of-people-walking-855564/](https://www.pexels.com/video/video-of-people-walking-855564/)
+The video used in the demo is from [Pexels](https://www.pexels.com/video/video-of-people-walking-855564/)
 
 ##  Setup
 1. Install dependencies
