@@ -1,7 +1,7 @@
 
 # Face Detection
 
-![Demo](max_faces.jpg)
+![Demo](/output/max_faces.jpg)
 
 ##  Description
 This is a simple face detection program. 
