@@ -1,13 +1,17 @@
 import cv2
 
-detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-cap = cv2.VideoCapture("video.mp4") # stock video from pexels
+max_faces = 0
 
 cv2.namedWindow('img', cv2.WINDOW_NORMAL)
-cv2.resizeWindow('img', 640, 480)
 cv2.setWindowTitle('img', 'Face Detection')
+cv2.resizeWindow('img', 800, 600)
+cv2.moveWindow('img', 0, 0)
 
-max_faces = 0
+
+detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+cap = cv2.VideoCapture("video.mp4") # stock video from pexels
+fps = cap.get(cv2.CAP_PROP_FPS)
+
 
 while cv2.waitKey(30) & 0xff != 27:
 	for i in range(2): # skip 2 frames
@@ -24,15 +28,15 @@ while cv2.waitKey(30) & 0xff != 27:
 
 	faces = detector.detectMultiScale(gray, 1.1, 4)
 
-	for (x, y, w, h) in faces:
-		cv2.circle(img, (x + w//2, y + h//2), 5, (0, 0, 255), -1)
-		cv2.circle(img, (x + w//2, y + h//2), w//2, (0, 0, 255), 2)
 
 	if len(faces) > max_faces:
 		max_faces = len(faces)
 
-	cv2.putText(img, f'Faces: {len(faces)}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-	cv2.putText(img, f'Max Faces: {max_faces}', (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+	for (x, y, w, h) in faces:
+		cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 0), 2)
+
+	cv2.putText(img, f'Faces: {len(faces)}', (10, 525), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+	cv2.putText(img, f'{fps:.2f}fps', (800, 525), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
 	if len(faces) == max_faces:
 		cv2.imwrite('max_faces.jpg', img)
