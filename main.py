@@ -8,8 +8,8 @@ cv2.resizeWindow('img', 800, 600)
 cv2.moveWindow('img', 0, 0)
 
 
-detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-cap = cv2.VideoCapture("video.mp4") # stock video from pexels
+detector = cv2.CascadeClassifier('./models/haarcascade_frontalface_default.xml')
+cap = cv2.VideoCapture("./input/video.mp4") # stock video from pexels
 fps = cap.get(cv2.CAP_PROP_FPS)
 
 
@@ -39,7 +39,7 @@ while cv2.waitKey(30) & 0xff != 27:
 	cv2.putText(img, f'{fps:.2f}fps', (800, 525), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
 	if len(faces) == max_faces:
-		cv2.imwrite('max_faces.jpg', img)
+		cv2.imwrite('./output/max_faces.jpg', img)
 
 	cv2.imshow('img', img)
 
